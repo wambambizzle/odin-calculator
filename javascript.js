@@ -8,6 +8,7 @@ let operator = "";
 
 const display = document.querySelector(".calculator-display");
 const calculatorNumbers = document.querySelector(".calculator-numbers");
+const clearButton = document.querySelector(".clear-button");
 
 // Math Functions
 
@@ -58,6 +59,18 @@ function setCalculatorNumbersListeners() {
   });
 }
 
+function setClearButtonListener() {
+  clearButton.addEventListener("click", clearAll);
+}
+
 setCalculatorNumbersListeners();
+setClearButtonListener();
 
 // Calculator Functions
+
+function clearAll() {
+  display.textContent = "0";
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+}
