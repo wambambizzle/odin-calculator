@@ -11,6 +11,7 @@ const calculatorNumbers = document.querySelector(".calculator-numbers");
 const calculatorOperators = document.querySelector(".calculator-operators");
 const equalsButton = document.querySelector(".operate-calculator");
 const clearButton = document.querySelector(".clear-button");
+const decimalButton = document.querySelector(".decimal-button");
 
 // Math Functions
 
@@ -45,7 +46,7 @@ function operate(operator, num1, num2) {
   }
 }
 
-// Stackoverflow - mdn - https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+// Stack Overflow - mdn - https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 function roundToTwo(num) {
   return +(Math.round(num + "e+2") + "e-2");
 }
@@ -62,6 +63,7 @@ function setCalculatorNumbersListeners() {
       } else if (display.textContent.length > 0 && operator === "") {
         display.textContent += button.textContent;
         firstNumber = display.textContent;
+        disableDecimal();
       } else if (operator.length > 0) {
         if (secondNumber.length === 0) {
           display.textContent = button.textContent;
@@ -70,6 +72,7 @@ function setCalculatorNumbersListeners() {
           display.textContent += button.textContent;
           secondNumber = display.textContent;
         }
+        disableDecimal();
       }
     });
   });
@@ -95,6 +98,8 @@ function setCalculatorOperatorsListener() {
         operator = button.textContent;
         equalsPressed();
       }
+
+      enableDecimal();
     });
   });
 }
@@ -115,6 +120,7 @@ function clearAll() {
   firstNumber = "";
   secondNumber = "";
   operator = "";
+  enableDecimal();
 }
 
 function equalsPressed() {
@@ -134,4 +140,16 @@ function equalsPressed() {
   display.textContent = value;
   firstNumber = value;
   secondNumber = "";
+}
+
+// Helper Methods
+
+function disableDecimal() {
+  if (display.textContent.includes(".")) {
+    decimalButton.disabled = true;
+  }
+}
+
+function enableDecimal() {
+  decimalButton.disabled = false;
 }
