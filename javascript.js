@@ -109,26 +109,26 @@ function setEqualsPressedListener() {
   equalsButton.addEventListener("click", equalsPressed);
 }
 
-function setDeleteButtonListener() {
-  deleteButton.addEventListener("click", () => {
-    console.log(
-      `Bruhhh: display length: ${display.textContent.length}, content: ${display.textContent}`
-    );
-    // Don't delete the default '0'
-    if (display.textContent.length == 1 && display.textContent === "0") {
-      console.log(`### should not be trying to remove`);
-    } else {
-      console.log(`### removeee`);
-      display.lastChild.remove();
-    }
-  });
-}
+// function setDeleteButtonListener() {
+//   deleteButton.addEventListener("click", () => {
+//     console.log(
+//       `Bruhhh: display length: ${display.textContent.length}, content: ${display.textContent}`
+//     );
+//     // Don't delete the default '0'
+//     if (display.textContent.length == 1 && display.textContent === "0") {
+//       console.log(`### should not be trying to remove`);
+//     } else {
+//       console.log(`### removeee`);
+//       display.lastChild.remove();
+//     }
+//   });
+// }
 
 setCalculatorNumbersListeners();
 setClearButtonListener();
 setCalculatorOperatorsListener();
 setEqualsPressedListener();
-setDeleteButtonListener();
+// setDeleteButtonListener();
 
 // Calculator Functions
 
@@ -163,7 +163,11 @@ function equalsPressed() {
   display.textContent = value;
   firstNumber = value;
   secondNumber = "";
-  // TODO: reanble decimal if the returning value has no decimals
+
+  if (!display.textContent.includes(".")) {
+    enableDecimal();
+  }
+  // TODO: re-enable decimal if the returning value has no decimals
 }
 
 // Helper Methods
