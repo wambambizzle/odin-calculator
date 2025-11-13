@@ -51,13 +51,21 @@ function setCalculatorNumbersListeners() {
   calculatorNumbers.childNodes.forEach((button) => {
     // TODO: remove to its own function?
     button.addEventListener("click", () => {
-      if (display.textContent === "0") {
+      if (display.textContent === "0" && operator === "") {
         display.textContent = button.textContent;
-      } else {
+        firstNumber = display.textContent;
+      } else if (display.textContent.length > 0 && operator === "") {
         display.textContent += button.textContent;
+        firstNumber = display.textContent;
+      } else if (operator.length > 0) {
+        if (secondNumber.length === 0) {
+          display.textContent = button.textContent;
+          secondNumber = display.textContent;
+        } else {
+          display.textContent += button.textContent;
+          secondNumber = display.textContent;
+        }
       }
-
-      firstNumber = display.textContent;
     });
   });
 }
@@ -70,23 +78,35 @@ function setCalculatorOperatorsListener() {
   calculatorOperators.childNodes.forEach((button) => {
     button.addEventListener("click", () => {
       // TODO: add a check to make sure firstNumber has a value first before assigning
-      // TOOD: handle selecting the same operand before hitting another number
+      // TODO: handle selecting the same operand before hitting another number
       // both dupes and new ones?
-      // handle the = logic
 
       operator = button.textContent;
-
-      console.log(
-        `#### operator assigned: ${operator}, text conetext: ${button.textContent}`
-      );
     });
   });
 }
 
 function setEqualsPressedListener() {
   equalsButton.addEventListener("click", () => {
-    console.log(`#### equals pressed`);
-    // TODO: add checks to make sure theres values firste
+    console.log(`### BRUH equals pressed`);
+    if (firstNumber.length === 0) {
+      console.log(`### no first num`);
+      return;
+    }
+
+    if (secondNumber.length === 0) {
+      console.log(`### no second num`);
+      return;
+    }
+
+    if (operator.length === 0) {
+      console.log(`### no operator cuhh`);
+      return;
+    }
+
+    let value = operate(operator, Number(firstNumber), Number(secondNumber));
+    console.log(`#### value: ${value}`);
+    display.textContent = value;
   });
 }
 
