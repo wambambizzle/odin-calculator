@@ -12,6 +12,7 @@ const calculatorOperators = document.querySelector(".calculator-operators");
 const equalsButton = document.querySelector(".operate-calculator");
 const clearButton = document.querySelector(".clear-button");
 const decimalButton = document.querySelector(".decimal-button");
+const deleteButton = document.querySelector(".delete-button");
 
 // Math Functions
 
@@ -108,10 +109,26 @@ function setEqualsPressedListener() {
   equalsButton.addEventListener("click", equalsPressed);
 }
 
+function setDeleteButtonListener() {
+  deleteButton.addEventListener("click", () => {
+    console.log(
+      `Bruhhh: display length: ${display.textContent.length}, content: ${display.textContent}`
+    );
+    // Don't delete the default '0'
+    if (display.textContent.length == 1 && display.textContent === "0") {
+      console.log(`### should not be trying to remove`);
+    } else {
+      console.log(`### removeee`);
+      display.lastChild.remove();
+    }
+  });
+}
+
 setCalculatorNumbersListeners();
 setClearButtonListener();
 setCalculatorOperatorsListener();
 setEqualsPressedListener();
+setDeleteButtonListener();
 
 // Calculator Functions
 
@@ -146,6 +163,7 @@ function equalsPressed() {
   display.textContent = value;
   firstNumber = value;
   secondNumber = "";
+  // TODO: reanble decimal if the returning value has no decimals
 }
 
 // Helper Methods
