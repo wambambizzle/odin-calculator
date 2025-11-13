@@ -109,6 +109,7 @@ function setEqualsPressedListener() {
   equalsButton.addEventListener("click", equalsPressed);
 }
 
+// TODO: Do later during portfolio clean up
 // function setDeleteButtonListener() {
 //   deleteButton.addEventListener("click", () => {
 //     console.log(
@@ -167,7 +168,6 @@ function equalsPressed() {
   if (!display.textContent.includes(".")) {
     enableDecimal();
   }
-  // TODO: re-enable decimal if the returning value has no decimals
 }
 
 // Helper Methods
