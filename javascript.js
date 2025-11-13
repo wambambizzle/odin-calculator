@@ -1,3 +1,9 @@
+// Holder variables
+
+let firstNumber = ""
+let secondNumber = ""
+let operator = ""
+
 // Math Functions
 
 function add(a, b) {
