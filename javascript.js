@@ -19,6 +19,7 @@ function add(a, b) {
 }
 
 function subtract(a, b) {
+  console.log(`### subtract - a: ${a} - b: ${b}`);
   return a - b;
 }
 
@@ -31,6 +32,8 @@ function divide(a, b) {
 }
 
 function operate(operator, num1, num2) {
+  console.log(`### active operator: ${operator}, num1: ${num1}, num2: ${num2}`);
+
   switch (operator) {
     case "+":
       return add(num1, num2);
@@ -80,34 +83,23 @@ function setCalculatorOperatorsListener() {
       // TODO: add a check to make sure firstNumber has a value first before assigning
       // TODO: handle selecting the same operand before hitting another number
       // both dupes and new ones?
+      // console.log(`### operator: ${button.textContent}`);
 
-      operator = button.textContent;
+      if (operator === "") {
+        operator = button.textContent;
+      } else if (firstNumber.length > 0 && secondNumber.length > 0) {
+        equalsPressed();
+        operator = button.textContent;
+      } else {
+        operator = button.textContent;
+        equalsPressed();
+      }
     });
   });
 }
 
 function setEqualsPressedListener() {
-  equalsButton.addEventListener("click", () => {
-    console.log(`### BRUH equals pressed`);
-    if (firstNumber.length === 0) {
-      console.log(`### no first num`);
-      return;
-    }
-
-    if (secondNumber.length === 0) {
-      console.log(`### no second num`);
-      return;
-    }
-
-    if (operator.length === 0) {
-      console.log(`### no operator cuhh`);
-      return;
-    }
-
-    let value = operate(operator, Number(firstNumber), Number(secondNumber));
-    console.log(`#### value: ${value}`);
-    display.textContent = value;
-  });
+  equalsButton.addEventListener("click", equalsPressed);
 }
 
 setCalculatorNumbersListeners();
@@ -122,4 +114,23 @@ function clearAll() {
   firstNumber = "";
   secondNumber = "";
   operator = "";
+}
+
+function equalsPressed() {
+  if (firstNumber.length === 0) {
+    return;
+  }
+
+  if (secondNumber.length === 0) {
+    return;
+  }
+
+  if (operator.length === 0) {
+    return;
+  }
+
+  let value = operate(operator, Number(firstNumber), Number(secondNumber));
+  display.textContent = value;
+  firstNumber = value;
+  secondNumber = "";
 }
