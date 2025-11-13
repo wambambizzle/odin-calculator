@@ -136,6 +136,12 @@ function equalsPressed() {
     return;
   }
 
+  if (operator === "/" && secondNumber === "0") {
+    clearAll();
+    display.textContent = "Bruh";
+    return;
+  }
+
   let value = operate(operator, Number(firstNumber), Number(secondNumber));
   display.textContent = value;
   firstNumber = value;
