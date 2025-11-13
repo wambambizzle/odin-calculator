@@ -8,6 +8,8 @@ let operator = "";
 
 const display = document.querySelector(".calculator-display");
 const calculatorNumbers = document.querySelector(".calculator-numbers");
+const calculatorOperators = document.querySelector(".calculator-operators");
+const equalsButton = document.querySelector(".operate-calculator");
 const clearButton = document.querySelector(".clear-button");
 
 // Math Functions
@@ -47,6 +49,7 @@ function operate(operator, num1, num2) {
 
 function setCalculatorNumbersListeners() {
   calculatorNumbers.childNodes.forEach((button) => {
+    // TODO: remove to its own function?
     button.addEventListener("click", () => {
       if (display.textContent === "0") {
         display.textContent = button.textContent;
@@ -63,8 +66,34 @@ function setClearButtonListener() {
   clearButton.addEventListener("click", clearAll);
 }
 
+function setCalculatorOperatorsListener() {
+  calculatorOperators.childNodes.forEach((button) => {
+    button.addEventListener("click", () => {
+      // TODO: add a check to make sure firstNumber has a value first before assigning
+      // TOOD: handle selecting the same operand before hitting another number
+      // both dupes and new ones?
+      // handle the = logic
+
+      operator = button.textContent;
+
+      console.log(
+        `#### operator assigned: ${operator}, text conetext: ${button.textContent}`
+      );
+    });
+  });
+}
+
+function setEqualsPressedListener() {
+  equalsButton.addEventListener("click", () => {
+    console.log(`#### equals pressed`);
+    // TODO: add checks to make sure theres values firste
+  });
+}
+
 setCalculatorNumbersListeners();
 setClearButtonListener();
+setCalculatorOperatorsListener();
+setEqualsPressedListener();
 
 // Calculator Functions
 
