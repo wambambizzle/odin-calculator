@@ -19,7 +19,6 @@ function add(a, b) {
 }
 
 function subtract(a, b) {
-  console.log(`### subtract - a: ${a} - b: ${b}`);
   return a - b;
 }
 
@@ -32,20 +31,23 @@ function divide(a, b) {
 }
 
 function operate(operator, num1, num2) {
-  console.log(`### active operator: ${operator}, num1: ${num1}, num2: ${num2}`);
-
   switch (operator) {
     case "+":
-      return add(num1, num2);
+      return roundToTwo(add(num1, num2));
     case "-":
-      return subtract(num1, num2);
+      return roundToTwo(subtract(num1, num2));
     case ("*", "x"):
-      return multiply(num1, num2);
+      return roundToTwo(multiply(num1, num2));
     case "/":
-      return divide(num1, num2);
+      return roundToTwo(divide(num1, num2));
     default:
       break;
   }
+}
+
+// Stackoverflow - mdn - https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+function roundToTwo(num) {
+  return +(Math.round(num + "e+2") + "e-2");
 }
 
 // Event Listeners
@@ -83,7 +85,6 @@ function setCalculatorOperatorsListener() {
       // TODO: add a check to make sure firstNumber has a value first before assigning
       // TODO: handle selecting the same operand before hitting another number
       // both dupes and new ones?
-      // console.log(`### operator: ${button.textContent}`);
 
       if (operator === "") {
         operator = button.textContent;
